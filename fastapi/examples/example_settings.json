@@ -1,0 +1,48 @@
+{
+  "UID": "abcd1",
+  "title": "View title (short)",
+  "description": "Long view description",
+  "field_groups":[
+    {"id": "unique_group_id", "title": "Display Name Of The Group"}
+  ],
+  "fields":[
+    {
+      "name": "field_name",
+      "display_name": "Field Name",
+      "type": "numeric",
+      "range_min": 0.0,
+      "range_max": 1.0,
+      "default_val": 0.5,
+      "group": null
+    },
+    {
+      "name": "field2_name",
+      "display_name": "Field Two Name",
+      "type": "string",
+      "length": 100,
+      "default_val": "Some default value",
+      "group": null
+    },
+    {
+      "name": "field3_name",
+      "display_name": "Field Three Name",
+      "type": "selector",
+      "values": [
+        {"val": 0, "text": "Option One"},
+        {"val": 1, "text": "Option Two"},
+        {"val": 2, "text": "Option Three"},
+        {"val": 3, "text": "Option Four"}
+      ],
+      "default_val": 0,
+      "group": "unique_group_id"
+    },
+    {
+      "name": "field4_name",
+      "display_name": "Field Four Name",
+      "type": "string",
+      "length": 100,
+      "default_val": "Some default value",
+      "group": "unique_group_id"
+    }
+  ]
+}
