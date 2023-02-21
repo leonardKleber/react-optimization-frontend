@@ -7,7 +7,7 @@ The project consists of three views:
 
 | Settings View | Live View | Evaluation View |
 | :-: | :-: | :-: |
-| Starts and parameterizes the optimization application. | Privides live monitoring of the running optimization process. | - Visualizes, analyses and evaluates the results of the optimization process. |
+| Starts and parameterizes the optimization application. | Privides live monitoring of the running optimization process. | Visualizes, analyses and evaluates the results of the optimization process. |
 
 For further information, see the slides of the final presentation provided in the repository.
 
