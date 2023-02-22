@@ -12,3 +12,27 @@ The project consists of three views:
 For further information, see the slides of the final presentation provided in the repository.
 
 The original project was a collaboration with @jomino141 and @Aposelix and has been graded with a 1.3 (95%).
+
+## Set up FastAPI
+### 1. Install requirements
+Navigate into the *fastapi* folder and install all requirements with the following command:
+```
+pip3 install -r requirements.txt
+```
+### 2. Run the API
+Run the API like the following:
+```
+uvicorn app:app --reload
+```
+
+## Set up React
+### 1. Install requirements
+Navigate into the *react* folder and install all requirements with the following command:
+```
+npm install --legacy-peer-deps
+```
+### 2. Run React
+Run the React app like the following:
+```
+npm start
+```
