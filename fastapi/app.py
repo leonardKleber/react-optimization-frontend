@@ -30,10 +30,8 @@ def index():
 #
 # ALL METHODS FOR THE SETTINGS VIEW
 #
-# check_uid()
-# - Checks if there is a settings form for a given uid.
-#
 # provide_settings_form()
+# - Checks if there is a settings form for a given uid.
 # - Recieves a UID sting from the frontend.
 # - Sends a JSON file with the parameter settings form for the 
 #   optimization process to the front end.
@@ -44,27 +42,18 @@ def index():
 # - Sends a confirmation response, that data could be read.
 #  
 # *********************************************************************
-@app.post('/check_uid')
-def check_uid(uid: UID):
-    if uid.uid in UID_LIST:
-        return {
-            'status': 200,
-            'data': True
-        }
-    else:
-        return {
-            'status': 200,
-            'data': False
-        }
-
-
 @app.post('/provide_settings_form')
 def provide_settings_form(uid: UID):
     # TODO: This code assumes that the ID is always the example UID.
     settings = json.load(open('./examples/example_settings.json', 'r'))
+    if uid.uid in UID_LIST:
+        return {
+            'valid': True,
+            'settings': settings
+        }
     return {
-        'status': 200,
-        'data': settings
+        'valid': False,
+        'settings': {}
     }
 
 
