@@ -33,11 +33,18 @@ function SettingsView(props) {
 
   // Collects values from settings from and sends it to the backend.
   function submit_settings() {
+    let values = []
+
     for(let i = 0; i < settingsForm.fields.length; i++) {
-      // TODO: collect values and generate JSON
-      console.log(document.getElementById(settingsForm.fields[i].name).value);
+      values.push({
+        name: settingsForm.fields[i].name,
+        val: document.getElementById(settingsForm.fields[i].name).value
+      })
     }
-    // TODO: send json file via post request to backend.
+    
+    axios.post(API_BASE_URL + '/get_optimization_parameters', {values: {values}}).then((response) => {
+      console.log(response.status);
+    })
   }
 
   // Renders the UID input form.
@@ -80,7 +87,7 @@ function SettingsView(props) {
             <div 
               align="center"
               style={{
-                fontSize: "2em",
+                fontSize: "1.5em",
                 fontFamily: "Roboto"
               }}
             >

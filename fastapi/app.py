@@ -11,6 +11,10 @@ class UID(BaseModel):
     uid: str
 
 
+class SettingsFormValues(BaseModel):
+    values: dict
+
+
 app = FastAPI()
 app.add_middleware(
     CORSMiddleware,
@@ -23,7 +27,7 @@ app.add_middleware(
 
 @app.get('/')
 def index():
-    return {'status': 200}
+    return {}
 
 
 # *********************************************************************
@@ -58,6 +62,6 @@ def provide_settings_form(uid: UID):
 
 
 @app.post('/get_optimization_parameters')
-def get_optimization_parameters(values: dict):
+def get_optimization_parameters(values: SettingsFormValues):
     # TODO: Store or process the parameters for the optimization.
-    return {'status': 200}
+    return {}
