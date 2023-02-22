@@ -1,7 +1,7 @@
 # React Optimization Frontend
 A React frontend for a Python optimization application backend.
 
-This app is the refactored code of a university software project. It was intended to create a frontend for an already existing optimization application backend written in Python.
+This app is the refactored code of a university software project. It was intended to create a frontend for an already existing optimization application backend written in Python. The original project was a collaboration with @jomino141 and @Aposelix and has been graded with a 1.3 (95%).
 
 The project consists of three views:
 
@@ -10,8 +10,6 @@ The project consists of three views:
 | Starts and parameterizes the optimization application. | Privides live monitoring of the running optimization process. | Visualizes, analyses and evaluates the results of the optimization process. |
 
 For further information, see the slides of the final presentation provided in the repository.
-
-The original project was a collaboration with @jomino141 and @Aposelix and has been graded with a 1.3 (95%).
 
 ## Set up FastAPI
 ### 1. Install requirements
@@ -29,7 +27,7 @@ uvicorn app:app --reload
 ### 1. Install requirements
 Navigate into the *react* folder and install all requirements with the following command:
 ```
-npm install --legacy-peer-deps
+npm install
 ```
 ### 2. Run React
 Run the React app like the following:
