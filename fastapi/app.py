@@ -1,11 +1,24 @@
 import json
 from fastapi import FastAPI
+from pydantic import BaseModel
+from fastapi.middleware.cors import CORSMiddleware
 
 
 UID_LIST = ['abcd1']
 
 
+class UID(BaseModel):
+    uid: str
+
+
 app = FastAPI()
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins='http://localhost:3000',
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 
 @app.get('/')
@@ -32,8 +45,8 @@ def index():
 #  
 # *********************************************************************
 @app.post('/check_uid')
-def check_uid(uid: str):
-    if uid in UID_LIST:
+def check_uid(uid: UID):
+    if uid.uid in UID_LIST:
         return {
             'status': 200,
             'data': True
@@ -46,7 +59,7 @@ def check_uid(uid: str):
 
 
 @app.post('/provide_settings_form')
-def provide_settings_form(uid: str):
+def provide_settings_form(uid: UID):
     # TODO: This code assumes that the ID is always the example UID.
     settings = json.load(open('./examples/example_settings.json', 'r'))
     return {
