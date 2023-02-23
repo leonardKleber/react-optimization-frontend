@@ -1,13 +1,15 @@
-import React, { useEffect, useState } from 'react';
-import { useTheme } from '@mui/material/styles';
-import OutlinedInput from '@mui/material/OutlinedInput';
-import InputLabel from '@mui/material/InputLabel';
-import MenuItem from '@mui/material/MenuItem';
-import FormControl from '@mui/material/FormControl';
-import Select from '@mui/material/Select';
+import React, { useState } from 'react';
+
 import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
 import Stack from '@mui/material/Stack';
+import Select from '@mui/material/Select';
+import Button from '@mui/material/Button';
+import MenuItem from '@mui/material/MenuItem';
+import InputLabel from '@mui/material/InputLabel';
+import FormControl from '@mui/material/FormControl';
+import OutlinedInput from '@mui/material/OutlinedInput';
+
+import ScatterChart from './ScatterChart';
 
 const OBJECTIVE_VALUES = [
   {val: 0, text: 'Makespan'},
@@ -20,8 +22,8 @@ const WRONG_NUMBER_OF_VALUES_ERROR = 'Select either 2 or 3 values!';
 
 function EvaluationView(props) {
   const [selectedValues, setSelectedValues] = useState([]);
+  const [submittedValues, setSubmittedValues] = useState([]);
   const [valuesError, setValuesError] = useState('');
-  const [renderResults, setRenderResults] = useState(false);
   
   function handleValueInput(event) {
     const {target: { value }} = event;
@@ -31,22 +33,15 @@ function EvaluationView(props) {
   }
 
   function submit_values() {
-    if(selectedValues.length === 2) {
-      setRenderResults(true);
+    if(selectedValues.length === 2 || selectedValues.length === 3) {
       setValuesError('');
-      return;
+      setSubmittedValues(selectedValues);
+    } else {
+      setSubmittedValues([]);
+      setValuesError(WRONG_NUMBER_OF_VALUES_ERROR);
     }
-    if(selectedValues.length === 3) {
-      setRenderResults(true);
-      setValuesError('');
-      return;
-    }
-    setRenderResults(false);
-    setValuesError(WRONG_NUMBER_OF_VALUES_ERROR);
-    return;
   }
 
-  // Defines the structure of the input field.
   function render_input_field() {
     return (
       <React.Fragment>
@@ -107,25 +102,29 @@ function EvaluationView(props) {
       </React.Fragment>
     )
   }
-  // If no valid amount of values has been selected, render only the input field.
-  if(renderResults === false) {
+
+  if(submittedValues.length !== 0) {
     return (
       <React.Fragment>
         { render_input_field() }
+        <Box 
+          sx={{
+            width: '50%', 
+            paddingLeft: '25%'
+          }}
+        >
+          <ScatterChart values={submittedValues}/>
+        </Box>
       </React.Fragment>
     )
-  }
-  // If a valid amount of values has been selected, render the input field and the results.
-  else {
-    return (
+  } else {
+    return(
       <React.Fragment>
         { render_input_field() }
-        <div>
-          Results
-        </div>
       </React.Fragment>
     )
   }
 }
+
 
 export default EvaluationView;

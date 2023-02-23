@@ -3,6 +3,8 @@ from fastapi import FastAPI
 from pydantic import BaseModel
 from fastapi.middleware.cors import CORSMiddleware
 
+from scripts.chart_generation import *
+
 
 UID_LIST = ['abcd1']
 
@@ -13,6 +15,18 @@ class UID(BaseModel):
 
 class SettingsFormValues(BaseModel):
     values: dict
+
+
+class TwoDChartValues(BaseModel):
+    value1: int
+    value2: int
+
+
+class ThreeDChartValues(BaseModel):
+    value1: int
+    value2: int
+    value3: int
+    width: int
 
 
 app = FastAPI()
@@ -67,3 +81,33 @@ def provide_settings_form(uid: UID):
 def get_optimization_parameters(values: SettingsFormValues):
     # TODO: Store or process the parameters for the optimization.
     return {}
+
+
+# *********************************************************************
+#
+# ALL METHODS FOR THE EVALUATION VIEW
+#
+# provide_2d_scatter_chart()
+# - Recieves two objective values from 0 - 4 each.
+# - Generates JSON to generate a 2D scatter chart in the frontend.
+#
+# provide_3d_scatter_chart()
+# - Recieves three objective values from 0 - 4 each.
+# - Generates JSON to generate a 3D scatter chart in the frontend.
+#
+# *********************************************************************
+@app.post('/provide_2d_scatter_chart')
+def provide_2d_scatter_chart(values: TwoDChartValues):
+    # TODO: generate chart with the two given values.
+    return generate_2d_scatter_chart(values.value1, values.value2)
+
+
+@app.post('/provide_3d_scatter_chart')
+def provide_3d_scatter_chart(values: ThreeDChartValues):
+    # TODO: generate chart with the three given values.
+    return generate_3d_scatter_chart(
+        values.value1, 
+        values.value2, 
+        values.value3, 
+        values.width
+    )

@@ -1,14 +1,14 @@
-import React, { useState } from 'react';
 import axios from 'axios';
+import React, { useState } from 'react';
 
 import Box from '@mui/material/Box';
 import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 
+import StringField from "./StringField.jsx";
 import NumericField from "./NumericField.jsx";
 import SelectorField from "./SelectorField.jsx";
-import StringField from "./StringField.jsx";
 
 const API_BASE_URL = 'http://127.0.0.1:8000';
 const ERROR_WRONG_UID = 'There is no settings form for this UID.';
