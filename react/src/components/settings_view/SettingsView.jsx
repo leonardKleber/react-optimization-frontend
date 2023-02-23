@@ -51,7 +51,13 @@ function SettingsView(props) {
   if(validUid === false) {
     return (
       <React.Fragment>
-        <Box sx={{width: '30%', paddingLeft: '35%', paddingTop: '25%'}}>
+        <Box 
+          sx={{
+            width: '30%', 
+            paddingLeft: '35%', 
+            paddingTop: '25%'
+          }}
+        >
           <Stack spacing={2}>
             <TextField
               id="uid-input-field"
@@ -82,7 +88,13 @@ function SettingsView(props) {
   else {
     return (
       <React.Fragment>
-        <Box sx={{width: '60%', paddingLeft: '20%', paddingTop: '10%'}}>
+        <Box 
+          sx={{
+            width: '60%', 
+            paddingLeft: '20%', 
+            paddingTop: '10%'
+          }}
+        >
           <Stack spacing={2}>
             <div 
               align="center"

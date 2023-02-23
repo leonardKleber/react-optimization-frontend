@@ -48,9 +48,11 @@ def index():
 # *********************************************************************
 @app.post('/provide_settings_form')
 def provide_settings_form(uid: UID):
-    # TODO: This code assumes that the ID is always the example UID.
-    settings = json.load(open('./examples/example_settings.json', 'r'))
     if uid.uid in UID_LIST:
+        # This code assumes that the ID is always the example UID.
+        settings = json.load(
+            open('./examples/example_settings.json', 'r')
+        )
         return {
             'valid': True,
             'settings': settings
