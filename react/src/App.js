@@ -4,6 +4,7 @@ import EvaluationView from "./components/evaluation_view/EvaluationView";
 function App() {
   return (
     <EvaluationView/>
+    //<SettingsView/>
   )
 }
 

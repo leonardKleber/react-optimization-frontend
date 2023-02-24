@@ -10,6 +10,7 @@ import FormControl from '@mui/material/FormControl';
 import OutlinedInput from '@mui/material/OutlinedInput';
 
 import ScatterChart from './ScatterChart';
+import ErrorMessage from '../ErrorMessage';
 
 const OBJECTIVE_VALUES = [
   {val: 0, text: 'Makespan'},
@@ -23,7 +24,8 @@ const WRONG_NUMBER_OF_VALUES_ERROR = 'Select either 2 or 3 values!';
 function EvaluationView(props) {
   const [selectedValues, setSelectedValues] = useState([]);
   const [submittedValues, setSubmittedValues] = useState([]);
-  const [valuesError, setValuesError] = useState('');
+  const [valuesErrorMsg, setValuesErrorMsg] = useState('');
+  const [renderErrorMsg, setRenderErrorMsg] = useState(false);
   
   function handleValueInput(event) {
     const {target: { value }} = event;
@@ -34,11 +36,13 @@ function EvaluationView(props) {
 
   function submit_values() {
     if(selectedValues.length === 2 || selectedValues.length === 3) {
-      setValuesError('');
+      setValuesErrorMsg('');
+      setRenderErrorMsg(false);
       setSubmittedValues(selectedValues);
     } else {
       setSubmittedValues([]);
-      setValuesError(WRONG_NUMBER_OF_VALUES_ERROR);
+      setValuesErrorMsg(WRONG_NUMBER_OF_VALUES_ERROR);
+      setRenderErrorMsg(true);
     }
   }
 
@@ -88,15 +92,10 @@ function EvaluationView(props) {
             >
               Submit
             </Button>
-            <div 
-              align="center"
-              style={{
-                color: "#FF0000",
-                fontFamily: "Roboto",
-              }}
-            >
-              {valuesError}
-            </div>
+            <ErrorMessage 
+              visible={renderErrorMsg}
+              message={valuesErrorMsg}
+            />
           </Stack>
         </Box>
       </React.Fragment>

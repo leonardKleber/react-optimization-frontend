@@ -9,6 +9,7 @@ import TextField from '@mui/material/TextField';
 import StringField from "./StringField.jsx";
 import NumericField from "./NumericField.jsx";
 import SelectorField from "./SelectorField.jsx";
+import ErrorMessage from '../ErrorMessage.jsx';
 
 const API_BASE_URL = 'http://127.0.0.1:8000';
 const ERROR_WRONG_UID = 'There is no settings form for this UID.';
@@ -16,6 +17,7 @@ const ERROR_WRONG_UID = 'There is no settings form for this UID.';
 function SettingsView(props) {
   const [validUid, setValidUid] = useState(false);
   const [uidErrorMessage, setUidErrorMessage] = useState('');
+  const [renderErrorMsg, setRenderErrorMsg] = useState(false);
   const [settingsForm, setSettingsForm] = useState({});
 
   // Handles the submission of the UID input form.
@@ -25,6 +27,7 @@ function SettingsView(props) {
     axios.post(API_BASE_URL + '/provide_settings_form', {uid: current_uid}).then((response) => {
       if(response.data.valid === false) {
         setUidErrorMessage(ERROR_WRONG_UID);
+        setRenderErrorMsg(true);
       }
       setSettingsForm(response.data.settings);
       setValidUid(response.data.valid);
@@ -70,15 +73,10 @@ function SettingsView(props) {
             >
               Submit
             </Button>
-            <div 
-              align="center"
-              style={{
-                color: "#FF0000",
-                fontFamily: "Roboto"
-              }}
-            >
-              {uidErrorMessage}
-            </div>
+            <ErrorMessage
+              visible={renderErrorMsg}
+              message={uidErrorMessage}
+            />
           </Stack>
         </Box>
       </React.Fragment>
