@@ -11,6 +11,7 @@ import OutlinedInput from '@mui/material/OutlinedInput';
 
 import ScatterChart from './ScatterChart';
 import ErrorMessage from '../ErrorMessage';
+import TimelineChart from './TimelineChart';
 
 const OBJECTIVE_VALUES = [
   {val: 0, text: 'Makespan'},
@@ -112,7 +113,10 @@ function EvaluationView(props) {
             paddingLeft: '25%'
           }}
         >
-          <ScatterChart values={submittedValues}/>
+          <Stack spacing={2}>
+            <ScatterChart values={submittedValues}/>
+            <TimelineChart/>
+          </Stack>
         </Box>
       </React.Fragment>
     )
@@ -120,6 +124,16 @@ function EvaluationView(props) {
     return(
       <React.Fragment>
         { render_input_field() }
+        <Box 
+          sx={{
+            width: '50%', 
+            paddingLeft: '25%'
+          }}
+        >
+          <Stack spacing={2}>
+            <TimelineChart/>
+          </Stack>
+        </Box>
       </React.Fragment>
     )
   }
