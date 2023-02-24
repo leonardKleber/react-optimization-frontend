@@ -1,5 +1,5 @@
 # React Optimization Frontend
-A React frontend for a Python optimization application backend.
+A frontend for an optimization application built with React, FastAPI, MUI, ApexCharts and Plotly. 
 
 This app is the refactored code of a university software project. It was intended to create a frontend for an already existing optimization application backend written in Python. The original project was a collaboration with @jomino141 and @Aposelix and has been graded with a 1.3 (95%).
 
