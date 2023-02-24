@@ -29,6 +29,11 @@ class ThreeDChartValues(BaseModel):
     width: int
 
 
+class TimelineValues(BaseModel):
+    value_number: int
+    tardiness: bool
+
+
 app = FastAPI()
 app.add_middleware(
     CORSMiddleware,
@@ -95,11 +100,19 @@ def get_optimization_parameters(values: SettingsFormValues):
 # - Recieves three objective values from 0 - 4 each.
 # - Generates JSON to generate a 3D scatter chart in the frontend.
 #
+# provide_timeline_chart()
+# - Recieves the number of values to display and weather tardiness
+#   should be included.
+# - Generates JSON to generate a gant chart in the frontend.
+#
 # *********************************************************************
 @app.post('/provide_2d_scatter_chart')
 def provide_2d_scatter_chart(values: TwoDChartValues):
     # TODO: generate chart with the two given values.
-    return generate_2d_scatter_chart(values.value1, values.value2)
+    return generate_2d_scatter_chart(
+        values.value1, 
+        values.value2
+    )
 
 
 @app.post('/provide_3d_scatter_chart')
@@ -110,4 +123,12 @@ def provide_3d_scatter_chart(values: ThreeDChartValues):
         values.value2, 
         values.value3, 
         values.width
+    )
+
+
+@app.post('/provide_timeline_chart')
+def provide_timeline_chart(values: TimelineValues):
+    return generate_timeline_chart(
+        values.value_number, 
+        values.tardiness
     )
