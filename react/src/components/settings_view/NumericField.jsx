@@ -9,6 +9,7 @@ function NumericField(props) {
         inputProps={{ inputMode: "numeric", pattern: "[0-9]*" }}
         placeholder={props.field.default_val}
         label={props.field.display_name}
+        type='number'
       />
     </React.Fragment>
   )

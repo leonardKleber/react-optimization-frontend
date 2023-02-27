@@ -7,6 +7,7 @@ from scripts.chart_generation import *
 
 
 UID_LIST = ['abcd1']
+OPTIMIZATION_STATUS = 0
 
 
 class UID(BaseModel):
@@ -49,6 +50,12 @@ def index():
     return {}
 
 
+@app.get('/status')
+def status():
+    global OPTIMIZATION_STATUS
+    return OPTIMIZATION_STATUS
+
+
 # *********************************************************************
 #
 # ALL METHODS FOR THE SETTINGS VIEW
@@ -84,6 +91,9 @@ def provide_settings_form(uid: UID):
 
 @app.post('/get_optimization_parameters')
 def get_optimization_parameters(values: SettingsFormValues):
+    # Change optimization status to 1.
+    global OPTIMIZATION_STATUS
+    OPTIMIZATION_STATUS = 1
     # TODO: Store or process the parameters for the optimization.
     return {}
 
