@@ -6,6 +6,7 @@ import Box from '@mui/material/Box';
 import ErrorMessage from "./components/ErrorMessage.jsx"
 import SettingsView from "./components/settings_view/SettingsView";
 import EvaluationView from "./components/evaluation_view/EvaluationView";
+import LiveView from './components/live_view/LiveView.jsx';
 
 const API_BASE_URL = 'http://127.0.0.1:8000';
 
@@ -31,6 +32,10 @@ function useInterval(callback, delay) {
 }
 
 function App() {
+  /*
+
+  !!! REMOVE THESE COMMENTS TO LEAVE DEBUG MODE !!!
+
   const [status, setStatus] = useState(0);
   
   // Make an API call every 1000ms to check the current state of the optimization process.
@@ -50,9 +55,7 @@ function App() {
   }
   if(status === 1) {
     return (
-      <div>
-        Live View
-      </div>
+      <LiveView/>
     )
   }
   if(status === 2) {
@@ -75,6 +78,14 @@ function App() {
         message={'The API has sent an unvalid status ID.'}
       />
     </Box>
+  )
+  */
+
+  // !!! COMMENT THIS FUNCTION OUT TO LEAVE DEBUG MODE.
+  return(
+    <React.Fragment>
+      <LiveView/>
+    </React.Fragment>
   )
 }
 
