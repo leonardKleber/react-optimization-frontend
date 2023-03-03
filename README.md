@@ -11,6 +11,11 @@ The project consists of three views:
 
 For further information, see the slides of the final presentation provided in the repository.
 
+## TODO
+- [ ] Add download buttons for charts.
+- [ ] Add logging of live data.
+- [ ] Add more error handling.
+
 ## Set up FastAPI
 ### 1. Install requirements
 Navigate into the *fastapi* folder and install all requirements with the following command:
