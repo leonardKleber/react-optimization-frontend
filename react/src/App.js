@@ -36,9 +36,14 @@ function App() {
   
   // Make an API call every 1000ms to check the current state of the optimization process.
   useInterval(() => {
-    axios.get(API_BASE_URL + '/status').then((response) => {
-      setStatus(response.data);
-    })
+    axios.get(API_BASE_URL + '/status')
+      .then((response) => {
+        setStatus(response.data);
+      })
+      .catch((e) => {
+        // Set the status to a number that will later result in an unvalid status.
+        setStatus(4);
+      })
   }, 1000);
   
   // Checks the status of the optimiaztion and renderes the necessary view.
@@ -69,17 +74,10 @@ function App() {
     >
       <ErrorMessage
         visible={true}
-        message={'The API has sent an unvalid status ID.'}
+        message={'You are probably not connected to the API. Please check you connection.'}
       />
     </Box>
   )
-  /*
-  return(
-    <React.Fragment>
-      <LiveView/>
-    </React.Fragment>
-  )
-  */
 }
 
 export default App;
