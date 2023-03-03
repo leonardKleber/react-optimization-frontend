@@ -3,7 +3,7 @@ import random
 
 result = []
 
-for i in range(1000):
+for i in range(100):
 	makespan = 10 * i + random.randint(10000, 15000)
 	t_tardiness = int(i / 10) + random.randint(500, 1000)
 	penalties = int(i / 100) + random.randint(0, 10)

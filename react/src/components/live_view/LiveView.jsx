@@ -3,39 +3,52 @@ import React, { useState } from 'react';
 import Box from '@mui/material/Box';
 import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
-import { Checkbox, FormControlLabel, FormGroup } from '@mui/material';
+import Checkbox from '@mui/material/Checkbox';
+import FormGroup from '@mui/material/FormGroup';
+import TextField from '@mui/material/TextField';
+import FormControlLabel from '@mui/material/FormControlLabel';
+
+import LiveCharts from './LiveCharts';
 
 function LiveView(props) {
-  const [renderCharts, setRenderCharts] = useState({
+  const [currentCharts, setCurrentCharts] = useState({
     makespan: false,
     tardiness: false,
     penalties: false,
     major_setup_s1: false,
     major_setup_s2: false
   });
+  const [finalCharts, setFinalCharts] = useState({});
+  const [currentRefreshRate, setCurrentRefreshRate] = useState(0);
+  const [finalRefreshRate, setFinalRefreshRate] = useState(0);
 
   const handle_makespan_change = (event) => {
-    setRenderCharts(renderCharts => ({...renderCharts, makespan: event.target.checked}));
+    setCurrentCharts(currentCharts => ({...currentCharts, makespan: event.target.checked}));
   }
   
   const handle_tardiness_change = (event) => {
-    setRenderCharts(renderCharts => ({...renderCharts, tardiness: event.target.checked}));
+    setCurrentCharts(currentCharts => ({...currentCharts, tardiness: event.target.checked}));
   }
 
   const handle_penalties_change = (event) => {
-    setRenderCharts(renderCharts => ({...renderCharts, penalties: event.target.checked}));
+    setCurrentCharts(currentCharts => ({...currentCharts, penalties: event.target.checked}));
   }
 
   const handle_s1_change = (event) => {
-    setRenderCharts(renderCharts => ({...renderCharts, major_setup_s1: event.target.checked}));
+    setCurrentCharts(currentCharts => ({...currentCharts, major_setup_s1: event.target.checked}));
   }
 
   const handle_s2_change = (event) => {
-    setRenderCharts(renderCharts => ({...renderCharts, major_setup_s2: event.target.checked}));
+    setCurrentCharts(currentCharts => ({...currentCharts, major_setup_s2: event.target.checked}));
+  }
+
+  const handle_rate_change = (event) => {
+    setCurrentRefreshRate(event.target.value);
   }
 
   function submit_values() {
-    console.log(renderCharts)
+    setFinalRefreshRate(currentRefreshRate);
+    setFinalCharts(currentCharts);
   }
 
   function render_checkboxes() {
@@ -49,11 +62,16 @@ function LiveView(props) {
           }}
         >
           <Stack spacing={2}>
+            <TextField
+              label="Refreshrate in seconds"
+              type="number"
+              onChange={handle_rate_change}
+            />
             <FormGroup>
               <FormControlLabel 
                 control={
                   <Checkbox
-                    checked={renderCharts.makespan}
+                    checked={currentCharts.makespan}
                     onChange={handle_makespan_change}
                   />
                 } 
@@ -62,7 +80,7 @@ function LiveView(props) {
               <FormControlLabel 
                 control={
                   <Checkbox
-                    checked={renderCharts.tardiness}
+                    checked={currentCharts.tardiness}
                     onChange={handle_tardiness_change}
                   />
                 } 
@@ -71,7 +89,7 @@ function LiveView(props) {
               <FormControlLabel 
                 control={
                   <Checkbox
-                    checked={renderCharts.penalties}
+                    checked={currentCharts.penalties}
                     onChange={handle_penalties_change}
                   />
                 } 
@@ -80,7 +98,7 @@ function LiveView(props) {
               <FormControlLabel 
                 control={
                   <Checkbox
-                    checked={renderCharts.major_setup_s1}
+                    checked={currentCharts.major_setup_s1}
                     onChange={handle_s1_change}
                   />
                 } 
@@ -89,7 +107,7 @@ function LiveView(props) {
               <FormControlLabel 
                 control={
                   <Checkbox
-                    checked={renderCharts.major_setup_s2}
+                    checked={currentCharts.major_setup_s2}
                     onChange={handle_s2_change}
                   />
                 } 
@@ -108,11 +126,23 @@ function LiveView(props) {
     )
   }
 
-  return (
-    <React.Fragment>
-      {render_checkboxes()}
-    </React.Fragment>
-  )
+  if (finalRefreshRate === 0) {
+    return (
+      <React.Fragment>
+        {render_checkboxes()}
+      </React.Fragment>
+    )
+  } else {
+    return (
+      <React.Fragment>
+        {render_checkboxes()}
+        <LiveCharts
+          renderCharts={finalCharts}
+          refreshRate={finalRefreshRate}
+        />
+      </React.Fragment>
+    )
+  }
 }
 
 export default LiveView;

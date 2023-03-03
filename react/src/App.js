@@ -32,10 +32,6 @@ function useInterval(callback, delay) {
 }
 
 function App() {
-  /*
-
-  !!! REMOVE THESE COMMENTS TO LEAVE DEBUG MODE !!!
-
   const [status, setStatus] = useState(0);
   
   // Make an API call every 1000ms to check the current state of the optimization process.
@@ -79,14 +75,13 @@ function App() {
       />
     </Box>
   )
-  */
-
-  // !!! COMMENT THIS FUNCTION OUT TO LEAVE DEBUG MODE.
+  /*
   return(
     <React.Fragment>
       <LiveView/>
     </React.Fragment>
   )
+  */
 }
 
 export default App;

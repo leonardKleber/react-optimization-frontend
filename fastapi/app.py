@@ -8,6 +8,7 @@ from scripts.chart_generation import *
 
 UID_LIST = ['abcd1']
 OPTIMIZATION_STATUS = 0
+LIVE_VIEW_CALL_COUNTER = 0
 
 
 class UID(BaseModel):
@@ -96,6 +97,31 @@ def get_optimization_parameters(values: SettingsFormValues):
     OPTIMIZATION_STATUS = 1
     # TODO: Store or process the parameters for the optimization.
     return {}
+
+
+# *********************************************************************
+#
+# ALL METHODS FOR THE LIVE VIEW
+#
+# provide_chart_data()
+# - Sends a JSON file with chart configurations for all 5 objective 
+#   values with their current data. The data is generated via API
+#   calls which are stored in the global variable
+#   LIVE_VIEW_CALL_COUNTER.
+# - If every result has been displayed, the optimization status
+#   switches to 2.
+#
+# *********************************************************************
+@app.get('/provide_chart_data')
+def provide_chart_data():
+    global LIVE_VIEW_CALL_COUNTER
+    global OPTIMIZATION_STATUS
+    LIVE_VIEW_CALL_COUNTER = LIVE_VIEW_CALL_COUNTER + 1
+    if generate_live_view_data(LIVE_VIEW_CALL_COUNTER) == 'Done':
+        OPTIMIZATION_STATUS = 2
+        LIVE_VIEW_CALL_COUNTER = 0
+        return 'Done'
+    return generate_live_view_data(LIVE_VIEW_CALL_COUNTER)
 
 
 # *********************************************************************

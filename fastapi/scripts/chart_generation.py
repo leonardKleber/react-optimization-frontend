@@ -171,3 +171,151 @@ def generate_timeline_chart(value_number, tardiness):
     }
 
     return data
+
+
+def generate_live_view_data(call_counter):
+    print(call_counter)
+    print(len(EXAMPLE_RESULTS))
+    if call_counter > len(EXAMPLE_RESULTS):
+        return 'Done'
+    makespan = []
+    tardiness = []
+    penalties = []
+    major_setup_s1 = []
+    major_setup_s2 = []
+    for i in range(call_counter):
+        makespan.append(EXAMPLE_RESULTS[i][0][0])
+        tardiness.append(EXAMPLE_RESULTS[i][0][1])
+        penalties.append(EXAMPLE_RESULTS[i][0][2])
+        major_setup_s1.append(EXAMPLE_RESULTS[i][0][3])
+        major_setup_s2.append(EXAMPLE_RESULTS[i][0][4])
+
+    all_chart_data = {
+        'makespan': {
+            'series': [{
+                'name': 'Makespan',
+                'data': makespan
+            }],
+            'options': {
+                'chart': {
+                    'height': 350,
+                    'type': 'line',
+                    'zoom': {
+                        'enabled': False
+                    }
+                },
+                'dataLabels': {
+                    'enabled': False
+                },
+                'stroke': {
+                    'curve': 'straight'
+                },
+                'title': {
+                    'text': 'Makespan',
+                    'align': 'left'
+                }
+            }
+        },
+        'tardiness': {
+            'series': [{
+                'name': 'Tardiness',
+                'data': tardiness
+            }],
+            'options': {
+                'chart': {
+                    'height': 350,
+                    'type': 'line',
+                    'zoom': {
+                        'enabled': False
+                    }
+                },
+                'dataLabels': {
+                    'enabled': False
+                },
+                'stroke': {
+                    'curve': 'straight'
+                },
+                'title': {
+                    'text': 'Tardiness',
+                    'align': 'left'
+                }
+            }
+        },
+        'penalties': {
+            'series': [{
+                'name': 'Penalties',
+                'data': penalties
+            }],
+            'options': {
+                'chart': {
+                    'height': 350,
+                    'type': 'line',
+                    'zoom': {
+                        'enabled': False
+                    }
+                },
+                'dataLabels': {
+                    'enabled': False
+                },
+                'stroke': {
+                    'curve': 'straight'
+                },
+                'title': {
+                    'text': 'Penalties',
+                    'align': 'left'
+                }
+            }
+        },
+        'major_setup_s1': {
+            'series': [{
+                'name': 'Major Setup S1',
+                'data': major_setup_s1
+            }],
+            'options': {
+                'chart': {
+                    'height': 350,
+                    'type': 'line',
+                    'zoom': {
+                        'enabled': False
+                    }
+                },
+                'dataLabels': {
+                    'enabled': False
+                },
+                'stroke': {
+                    'curve': 'straight'
+                },
+                'title': {
+                    'text': 'Major Setup S1',
+                    'align': 'left'
+                }
+            }
+        },
+        'major_setup_s2': {
+            'series': [{
+                'name': 'Major Setup S2',
+                'data': major_setup_s2
+            }],
+            'options': {
+                'chart': {
+                    'height': 350,
+                    'type': 'line',
+                    'zoom': {
+                        'enabled': False
+                    }
+                },
+                'dataLabels': {
+                    'enabled': False
+                },
+                'stroke': {
+                    'curve': 'straight'
+                },
+                'title': {
+                    'text': 'Major Setup S2',
+                    'align': 'left'
+                }
+            }
+        }
+    }
+
+    return all_chart_data
