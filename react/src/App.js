@@ -37,9 +37,7 @@ function App() {
   // Make an API call every 1000ms to check the current state of the optimization process.
   useInterval(() => {
     axios.get(API_BASE_URL + '/status').then((response) => {
-      console.log(response.data);
       setStatus(response.data);
-      console.log(status);
     })
   }, 1000);
   
