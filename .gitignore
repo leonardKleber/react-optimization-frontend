@@ -2,3 +2,5 @@ fastapi/__pycache__
 fastapi/venv
 fastapi/scripts/__pycache__
 react/node_modules
+mongodb/__pycache__
+mongodb/venv
