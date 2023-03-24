@@ -1,6 +1,9 @@
 # MongoDB
 ### Set up the MongoDB API
-- Create a local MongoDB
+- Start a local MongoDB
+```
+sudo service mongod start
+```
 - Copy the connection string and paste it into app.py
 - Run app.py
 ### Things to do before using the API
