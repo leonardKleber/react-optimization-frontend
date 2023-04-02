@@ -1,4 +1,4 @@
-# MongoDB databse
+# MongoDB database
 This folder contains an init file to set up the database for the project and a Dockerfile for the containerization of the database.
 Follow the guide at the end of this document to set up the database on your local machine.
 The content of the init file is not final. However it does proof all necessary concepts for later integrations.
